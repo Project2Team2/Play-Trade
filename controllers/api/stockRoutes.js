@@ -21,14 +21,19 @@ async function symbolSearch(searchquery){
           for(var i = 0; i < data.data.length; i++){
             if(data.data[i].country == "United States"){
               // console.log(data.data[i].instrument_name)
-              results.unshift(data.data[i])
+              // results.unshift(data.data[i])
+              Stock.create({name:data.data[i].instrument_name,
+                symbol: data.data[i].symbol,
+                price: 0.0,
+              })
             }
           }
 
         }
-        console.log(results)
+        // console.log(results)
     });
-    
+    const stockData = Stock.findAll
+    res.render('stock')
     // return results;
 }
 
