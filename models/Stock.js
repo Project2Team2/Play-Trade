@@ -17,6 +17,10 @@ Stock.init(
             type: DataTypes.STRING,
             allowNull: false,
           },
+        symbol: {
+            type: DataTypes.STRING,
+            allowNull: false,
+          },
         price: {
             type: DataTypes.DECIMAL,
             allowNull: false,
