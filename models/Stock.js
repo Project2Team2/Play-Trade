@@ -17,7 +17,7 @@ Stock.init(
             type: DataTypes.STRING,
             allowNull: false,
           },
-          symbol: {
+        symbol: {
             type: DataTypes.STRING,
             allowNull: false,
           },

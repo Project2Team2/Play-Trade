@@ -1,52 +1,10 @@
 'use strict';
 const router = require('express').Router();
-var request = require('request');
+const axios = require('axios')
 const {Stock} = require('../../models')
 const apikey = "2d39de05a6c0431c871588b30dec7652"
 
-async function  symbolSearch(searchquery){
-    var results = [];
-    var url = 'https://api.twelvedata.com/symbol_search?symbol=' + searchquery + '&apikey=' + apikey;
-    request.get({
-        url: url,
-        json: true,
-        headers: {'User-Agent': 'request'}
-      }, async (err, res, data) => {
-        if (err) {
-          console.log('Error:', err);
-        } else if (res.statusCode !== 200) {
-          console.log('Status:', res.statusCode);
-        } else {
-          // console.log(data.data[0]);
-          for(var i = 0; i < data.data.length; i++){
-            if(data.data[i].country == "United States"){
-              const stock =  await Stock.findOne({
-                where:{
-                  name: data.data[i].instrument_name
-                }
-              })
-              if(!stock){
-                await Stock.create({name:data.data[i].instrument_name,
-                  symbol: data.data[i].symbol,
-                  price: 0.0,
-                })
-              }
-              
-              const stockData =  await Stock.findOne({
-                where:{
-                  name: data.data[i].instrument_name
-                }
-              })
-              results.unshift(stockData)
-            }
-          }
-          
-        }
-        console.log(results)
-    });
-    
-    // return results;
-}
+
 
 async function CheckPrices(tickers)
 {
@@ -69,18 +27,39 @@ request.get({
 
 }
 
-
-
-router.post('/search',(req,res)=>{
+router.get('/search/:searchVal',async (req,res)=>{
     
     try{
-      symbolSearch(req.body.searchVal);
       
-    res.render('stock')
+      var url = 'https://api.twelvedata.com/symbol_search?symbol=' + req.params.searchVal + '&apikey=' + apikey;
+      var response = await axios.get(url);
+      
+      var filteredData = response.data.data.filter(stock => stock.country == "United States"); 
+      for (var i = 0; i < filteredData.length; i++){
+        const stock =  await Stock.findOne({
+          where:{
+            name: filteredData[i].instrument_name
+          }
+        })
+        if(!stock){
+          await Stock.create({name:filteredData[i].instrument_name,
+            symbol: filteredData[i].symbol,
+            price: 0.0,
+          })
+        }
+        
+        const stockData =  await Stock.findOne({
+          where:{
+            name: filteredData[i].instrument_name
+          }
+        })
+        
+      }
+    res.json(filteredData)
 
     }catch(err){
         console.log(err);
     res.status(500).json(err);
     }
-})
+});
 module.exports = router;

@@ -1,6 +1,6 @@
-<h1>This is the stock view</h1>
-<div class="stock-card">
-    <div class="stock-name">
-     <h2>{{stock.symbol}}</h2>
+<h1>Search Results</h1>
+{{#each stocks as |stock| }}
+    <div class="stock-details">
+        <h2>{{stock.instrument_name}} <button>{{stock.symbol}}</button></h2>
     </div>
-</div>
+{{/each}}
