@@ -5,17 +5,27 @@ const withAuth = require('../utils/auth');
 const axios = require('axios');
 const apikey = "2d39de05a6c0431c871588b30dec7652"
 
-router.get('/', /* withAuth, */ async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
   try {
-    const userData = await User.findAll({
-      attributes: { exclude: ['password'] },
-      order: [['name', 'ASC']],
-    });
+    const userData = await User.findAll();
 
     const users = userData.map((project) => project.get({ plain: true }));
 
     res.render('homepage', {
       users,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/portfolio/:name', /* withAuth, */ async (req, res) => {
+  try {
+  const userData = await User.findByPk(res.params.name);
+  const user = userData.map((profile) => profile.get({ plain: true }));
+    res.render('portfolio', {
+      user,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -31,14 +41,16 @@ router.get('/login', (req, res) => {
 
   res.render('login');
 });
-router.get('/stock',async (req,res)=>{
+
+router.get('/stock', withAuth, async (req,res)=>{
   console.log(`req query`, req.query)
   var url = 'https://api.twelvedata.com/symbol_search?symbol=' + req.query.search + '&apikey=' + apikey;
   var response = await axios.get(url);
   var filteredData = response.data.data.filter(stock => stock.country == "United States"); 
   console.log(filteredData)
   res.render('stock',{
-    stocks: filteredData
+    stocks: filteredData,
+    logged_in: req.session.logged_in
   });
 });
 

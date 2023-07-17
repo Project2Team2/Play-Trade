@@ -1,13 +1,10 @@
-console.log("hello");
 const searchBox = document.querySelector('#search-input')
-console.log(searchBox);
 const searchBtn = document.getElementById("search-button");
-console.log(searchBtn);
 
-searchBtn.addEventListener("click", ()=>{
+/* searchBtn.addEventListener("click", ()=>{
     const searchvalue = document.querySelector('#search-input').value
     
-});
+}); */
 
 //toggle button function NOT WORKING
 document.addEventListener('DOMContentLoaded', function () {
@@ -22,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 //pres log in button get routed to main.handlebars NOT WORKING
-document.addEventListener('DOMContentLoaded', function () {
+/* document.addEventListener('DOMContentLoaded', function () {
     var loginForm = document.getElementById('loginForm');
     
     loginForm.addEventListener('submit', function (event) {
@@ -34,4 +31,4 @@ document.addEventListener('DOMContentLoaded', function () {
         // Redirect to the specified URL
         window.location.href = action;
     });
-});
+}); */
