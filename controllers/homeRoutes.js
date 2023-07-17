@@ -43,9 +43,11 @@ router.get('/stock',async (req,res)=>{
 });
 
 router.get('/price', async (req, res) => {
-  var url = 'https://api.twelvedata.com/price?symbol=' + tickers.toString() + '&apikey=' + apikey;
+  // console.log(`req query`, req.query)
+  var url = 'https://api.twelvedata.com/price?symbol=' + req.query.symbol + '&apikey=' + apikey;
   var response = await axios.get(url);
-  console.log(response)
+  console.log(response.data.price)
+  res.render('price')
 })
 
 module.exports = router;

@@ -19,10 +19,10 @@
             <!-- Sidebar Toggle NOT WORKING NOT SURE WHY-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" method="get" action="/stock">
                 <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" id="search-input"/>
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" id="search-input"/ name="search">
+                    <button class="btn btn-primary" id="btnNavbarSearch" type="submit"><i class="fas fa-search"></i></button>
                 </div>
             </form>
             <!-- Navbar-->
@@ -78,17 +78,13 @@
                     </div>
                 </nav>
             </div>
+        </div>
+             <!-- Page content wrapper-->
+             {{!-- this needs to be fixed so it goes in the right spot in the layout --}}
+             <div id="page-content-wrapper">
+            {{{body}}}
+        </div>
             <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid px-4">
-                        <h1 class="mt-4">Portfolio</h1>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                Stock content can go here
-                            </div>
-                        </div>
-                    </div>
-                </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
@@ -102,7 +98,8 @@
                     </div>
                 </footer>
             </div>
-        </div>
+        
+        
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../../public/js/script.js"></script>
     </body>
