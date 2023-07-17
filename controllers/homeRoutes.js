@@ -14,10 +14,12 @@ router.get('/', withAuth, async (req, res) => {
     res.render('homepage', {
       users,
       logged_in: req.session.logged_in,
+      user_id: req.session.user_id,
     });
   } catch (err) {
     res.status(500).json(err);
   }
+  console.log(req.session)
 });
 
 router.get('/portfolio/:name', /* withAuth, */ async (req, res) => {
@@ -47,19 +49,22 @@ router.get('/stock', withAuth, async (req,res)=>{
   var url = 'https://api.twelvedata.com/symbol_search?symbol=' + req.query.search + '&apikey=' + apikey;
   var response = await axios.get(url);
   var filteredData = response.data.data.filter(stock => stock.country == "United States"); 
-  console.log(filteredData)
+  // console.log(filteredData)
   res.render('stock',{
     stocks: filteredData,
     logged_in: req.session.logged_in
   });
 });
 
-router.get('/price', async (req, res) => {
+router.get('/quote', async (req, res) => {
   // console.log(`req query`, req.query)
-  var url = 'https://api.twelvedata.com/price?symbol=' + req.query.symbol + '&apikey=' + apikey;
+  var url = 'https://api.twelvedata.com/quote?symbol=' + req.query.symbol + '&apikey=' + apikey;
   var response = await axios.get(url);
-  console.log(response.data.price)
-  res.render('price')
+  // console.log(response.data)
+  var data = response.data;
+  res.render('quote',{
+    data: data
+  })
 })
 
 module.exports = router;
