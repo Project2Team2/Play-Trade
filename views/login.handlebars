@@ -10,24 +10,41 @@
                                     <div class="card-body">
                                         <form id="login-form">
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
-                                                <label for="inputEmail">Email address</label>
+                                                <input class="form-control" id="email-login" type="email" placeholder="name@example.com" />
+                                                <label for="email-login">Email address</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputPassword" type="password" placeholder="Password" />
-                                                <label for="inputPassword">Password</label>
+                                                <input class="form-control" id="password-login" type="password" placeholder="Password" />
+                                                <label for="password-login">Password</label>
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <button class="btn btn-primary" type="submit">Login</a>
+                                                <a class="btn btn-primary" href="index.html">Login</a>
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="card-footer text-center py-3">
-                                        <div class="small">
-                                            
-                                            <a href="register.handlebars">Need an account? Sign up!</a>
-                                          
-                                        </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Sign Up</h3></div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" id="name-signup" type="email" placeholder="name@example.com" />
+                                                <label for="name-signup">Username</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" id="email-signup" type="email" placeholder="name@example.com" />
+                                                <label for="email-signup">Email address</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" id="password-signup" type="password" placeholder="Password" />
+                                                <label for="password-signup">Password</label>
+                                            </div>
+                                            <div class="d-flex align-items-center justify-content-between mt-4 mb-0" id="signup-form">
+                                                <a class="btn btn-primary" href="">Signup</a>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -45,4 +62,4 @@
             </div>
         </div>
 
-<script src="/js/login.js"></script>
+<script src="/public/js/login.js"></script>
