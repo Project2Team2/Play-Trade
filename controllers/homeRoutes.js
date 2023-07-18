@@ -65,6 +65,7 @@ router.get('/stock',async (req,res)=>{
 });
 
 router.get('/quote', async (req, res) => {
+  const user_id= req.session.user_id;
   // console.log(`req query`, req.query)
   var url = 'https://api.twelvedata.com/quote?symbol=' + req.query.symbol + '&apikey=' + apikey;
   var response = await axios.get(url);

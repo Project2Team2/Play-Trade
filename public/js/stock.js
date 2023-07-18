@@ -1,13 +1,17 @@
-const saveBtn = document.querySelector('#save-btn');
-const addToPortfolio = async () => {
-   
+console.log("stock.js running on quote view")
+const addToPortfolio = async (event) => {
+  event.preventDefault();
   
-    const name = document.querySelector('#name').value.trim();
-    const closePrice = document.querySelector('#closePrice').value.trim();
-    const symbol = document.querySelector('#symbol').value.trim();
+   console.log("front end add to portfolio started")
   
+    const name = document.querySelector('#name').innerHTML
+    var closePrice = document.querySelector('#closePrice').innerHTML
+    const symbol = document.querySelector('#symbol').innerHTML
+    closePrice = closePrice.slice(1)
+    closePrice = parseFloat(closePrice)
+    console.log(closePrice)
     if (name && closePrice && symbol) {
-      const response = await fetch('/api/stock', {
+      const response = await fetch('/api/stocks', {
         method: 'POST',
         body: JSON.stringify({ name, closePrice, symbol }),
         headers: { 'Content-Type': 'application/json' },
@@ -21,4 +25,4 @@ const addToPortfolio = async () => {
       }
     }
   };
-saveBtn.addEventListener('click',addToPortfolio)
+  document.querySelector('#save-btn').addEventListener('click',addToPortfolio);

@@ -5,9 +5,8 @@ table, th, td {
  
 }
 </style> --}}
-
 <h1>Stock Quote Information</h1>
-<h2><span id="name">{{data.name}}</span> - <span id="symbol">{{data.symbol}}</span></h2>
+<h2><span id="name">{{{data.name}}}</span> - <span id="symbol">{{{data.symbol}}}</span></h2>
 <h3>{{data.datetime}}</h3>
 <table class="my-table" style="width:100%">
     {{!-- <thead class="thead-dark"> --}}
@@ -33,6 +32,6 @@ table, th, td {
     </tr>
 </table>
 
-<button id="save-btn" type="save" class="btn">Add Stock to Portfolio</button>
+<button id="save-btn" type="button" class="btn">Add Stock to Portfolio</button>
 
-<script src="../public/js/stock.js"></script>
+<script src="./js/stock.js"></script>

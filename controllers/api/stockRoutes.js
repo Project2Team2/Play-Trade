@@ -3,6 +3,7 @@ const router = require('express').Router();
 const axios = require('axios')
 const {Stock} = require('../../models')
 const {OwnedStock} = require('../../models')
+const {User} = require('../../models')
 const apikey = "2d39de05a6c0431c871588b30dec7652"
 
 router.post('/', async (req, res) => {
@@ -15,14 +16,14 @@ router.post('/', async (req, res) => {
     });
     const userData = await User.findOne({
       where:{
-        id: user_id
+        id: req.session.user_id
       },
       attributes: { exclude: ['password'] },
     })
     
     const ownedStockData = await OwnedStock.create({
-      owner_id: userData.dataValues.name, 
-      stock_id: dbStockdata.id,
+      owner_id: userData.dataValues.id, 
+      stock_id: dbStockData.id,
     })
     res.status(200).json(dbStockData);
   } catch (err) {
