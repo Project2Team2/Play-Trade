@@ -7,17 +7,26 @@ const apikey = "2d39de05a6c0431c871588b30dec7652"
 
 router.get('/', /* withAuth, */ async (req, res) => {
   try {
-    const userData = await User.findAll({
+    const user_id= req.session.user_id;
+    const usersData = await User.findAll({
       attributes: { exclude: ['password'] },
       order: [['name', 'ASC']],
     });
 
-    const users = userData.map((project) => project.get({ plain: true }));
+    const users = usersData.map((project) => project.get({ plain: true }));
+
+    const userData = await User.findOne({
+      where:{
+        id: user_id
+      },
+      attributes: { exclude: ['password'] },
+    })
+    console.log(userData)
 
     res.render('homepage', {
       users,
       logged_in: req.session.logged_in,
-      user_id: req.session.user_id,
+      user:userData.dataValues.name,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -33,6 +42,7 @@ router.get('/login', (req, res) => {
 
   res.render('login');
 });
+
 router.get('/stock',async (req,res)=>{
   console.log(`req query`, req.query)
   var url = 'https://api.twelvedata.com/symbol_search?symbol=' + req.query.search + '&apikey=' + apikey;
