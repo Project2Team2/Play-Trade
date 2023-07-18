@@ -60,9 +60,16 @@ router.get('/quote', async (req, res) => {
   var response = await axios.get(url);
   // console.log(response.data)
   var data = response.data;
+  var open = parseFloat(data.open).toFixed(2);
+  var close = parseFloat(data.close).toFixed(2);
+  var high = parseFloat(data.high).toFixed(2);
+  var low = parseFloat(data.low).toFixed(2);
   res.render('quote',{
-    data: data
-  })
-})
-
+    data: data,
+    open: open,
+    close: close,
+    high: high,
+    low: low
+  });
+});
 module.exports = router;
