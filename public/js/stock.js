@@ -1,5 +1,6 @@
-const signupFormHandler = async (event) => {
-    event.preventDefault();
+const saveBtn = document.querySelector('#save-btn');
+const addToPortfolio = async () => {
+   
   
     const name = document.querySelector('#name').value.trim();
     const closePrice = document.querySelector('#closePrice').value.trim();
@@ -20,3 +21,4 @@ const signupFormHandler = async (event) => {
       }
     }
   };
+saveBtn.addEventListener('click',addToPortfolio)

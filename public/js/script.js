@@ -7,16 +7,11 @@ const searchBtn = document.getElementById("search-button");
 }); */
 
 //toggle button function NOT WORKING
-document.addEventListener('DOMContentLoaded', function () {
-    var sidebarToggle = document.getElementById('sidebarToggle');
-    var layoutSidenav = document.getElementById('layoutSidenav');
-    
-    sidebarToggle.addEventListener('click', function (event) {
-        event.preventDefault();
-        
-        layoutSidenav.classList.toggle('sb-sidenav-toggled');
+$(document).ready(function() {
+    $('#sidebarToggle').click(function() {
+      $('#layoutSidenav').toggleClass('show');
     });
-});
+  });
 
 //pres log in button get routed to main.handlebars NOT WORKING
 /* document.addEventListener('DOMContentLoaded', function () {

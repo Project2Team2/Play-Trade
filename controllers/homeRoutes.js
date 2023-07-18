@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User } = require('../models')
 const { Stock }  = require('../models');
+const { OwnedStock }  = require('../models');
 const withAuth = require('../utils/auth');
 const axios = require('axios');
 const apikey = "2d39de05a6c0431c871588b30dec7652"
@@ -15,7 +16,7 @@ router.get('/', withAuth, async (req, res) => {
     });
 
     const users = usersData.map((project) => project.get({ plain: true }));
-    console.log("hello, world");
+    console.log(users);
     const userData = await User.findOne({
       where:{
         id: user_id
@@ -23,6 +24,21 @@ router.get('/', withAuth, async (req, res) => {
       attributes: { exclude: ['password'] },
     })
      console.log(userData)
+
+     // query OwnedStock table to find all entries where owner_id = user's id
+  const ownedData = await OwnedStock.findAll({
+    where:{
+      owner_id: userData.dataValues.id
+    }
+  })
+  // quuery stock table to find all stocks where the ids match
+  const stocks = ownedData.map((stock) => stock.get({ plain: true }));
+  stocks.forEach(async (element) => 
+  await Stock.findAll({
+    where:{
+      id: element.stock_id
+    }
+  }))
 
     
     res.render('homepage', {
@@ -67,10 +83,6 @@ router.get('/quote', async (req, res) => {
   });
 });
 
-router.get('/portfolio',async (req,res)=>{
-
-  res.render('portfolio')
-});
 
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {

@@ -13,10 +13,16 @@ router.post('/', async (req, res) => {
     close_price: req.body.closePrice,
     symbol: req.body.symbol
     });
-
+    const userData = await User.findOne({
+      where:{
+        id: user_id
+      },
+      attributes: { exclude: ['password'] },
+    })
+    
     const ownedStockData = await OwnedStock.create({
-      // owner_id
-      // stock_id: dbStockdata.id
+      owner_id: userData.dataValues.name, 
+      stock_id: dbStockdata.id,
     })
     res.status(200).json(dbStockData);
   } catch (err) {
