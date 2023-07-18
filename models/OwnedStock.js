@@ -24,13 +24,6 @@ OwnedStock.init(
                 model: 'stock',
                 key: 'id'
             }
-        },
-         shares_owned: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            validate:{
-                isInt: true
-            }
         }
     },
     {
