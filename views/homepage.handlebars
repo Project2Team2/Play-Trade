@@ -1,5 +1,19 @@
-
+{{!-- the data gets on the page but it could look better --}}
 <h1 class="mt-4">Portfolio</h1>
-<table>
-    
+{{#each stocks as |stock|}}
+<table class="my-table" style="width:100%">
+    {{!-- <thead class="thead-dark"> --}}
+    <tr>
+        <td class="thead-dark">Name</td>
+        <td class="thead-dark">{{stock.dataValues.name}}</td>
+    </tr>
+     <tr>
+        <td>Symbol</td>
+        <td>{{stock.dataValues.symbol}}</td>
+    </tr>
+     <tr>
+        <td>Close Price</td>
+        <td>${{stock.dataValues.close_price}}</td>
+     </tr>
 </table>
+{{/each}}

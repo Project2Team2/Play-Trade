@@ -32,19 +32,24 @@ router.get('/', withAuth, async (req, res) => {
     }
   })
   // quuery stock table to find all stocks where the ids match
-  const stocks = ownedData.map((stock) => stock.get({ plain: true }));
-  stocks.forEach(async (element) => 
-  await Stock.findAll({
-    where:{
-      id: element.stock_id
+  const ownedstocks = ownedData.map((stock) => stock.get({ plain: true }));
+  // console.log(ownedstocks)
+  var stocks = [];
+  for(var i = 0; i< ownedstocks.length; i++){
+    const stockData = await Stock.findOne({
+      where:{
+        id:ownedstocks[i].stock_id
+      }
+    })
+    stocks.unshift(stockData)
     }
-  }))
-
+    console.log(stocks[0].dataValues)
     
     res.render('homepage', {
       users,
       logged_in: req.session.logged_in,
       user: userData.dataValues.name,
+      stocks:stocks,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -65,7 +70,7 @@ router.get('/stock',async (req,res)=>{
 });
 
 router.get('/quote', async (req, res) => {
-  const user_id= req.session.user_id;
+  // const user_id= req.session.user_id;
   // console.log(`req query`, req.query)
   var url = 'https://api.twelvedata.com/quote?symbol=' + req.query.symbol + '&apikey=' + apikey;
   var response = await axios.get(url);
