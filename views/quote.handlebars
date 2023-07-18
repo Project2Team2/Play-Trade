@@ -1,0 +1,31 @@
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<h1>Stock Quote Information</h1>
+<h2>{{data.name}} - {{data.symbol}}</h2>
+<h3>{{data.datetime}}</h3>
+<table class="stock-info">
+    <tr>
+        <td>Exchange</td>
+        <td>{{data.exchange}}</td>
+    </tr>
+     <tr>
+        <td>Open Price</td>
+        <td>${{data.open}}</td>
+    </tr>
+     <tr>
+        <td>High Price</td>
+        <td>${{data.high}}</td>
+    </tr>
+     <tr>
+        <td>Low Price</td>
+        <td>${{data.low}}</td>
+    </tr>
+     <tr>
+        <td>Close Price</td>
+        <td>${{data.close}}</td>
+    </tr>
+</table>

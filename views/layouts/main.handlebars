@@ -11,7 +11,7 @@
         <link href="./css/stylesheet.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
-    <body class="sb-nav-fixed">
+    <body >
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <img src="../images/logo1.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
@@ -72,18 +72,21 @@
                             </a>
                         </div>
                     </div>
+          
+        
+        
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
                         Connect to User Info
                     </div>
                 </nav>
             </div>
-        </div>
-             <!-- Page content wrapper-->
-             {{!-- this needs to be fixed so it goes in the right spot in the layout --}}
-             <div id="page-content-wrapper">
+                      {{!-- handlebars template body --}}
+             <div id="page-content-wrapper"></div>
             {{{body}}}
+            </div>
         </div>
+            
             <div id="layoutSidenav_content">
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
@@ -98,7 +101,7 @@
                     </div>
                 </footer>
             </div>
-        
+         
         
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../../public/js/script.js"></script>
