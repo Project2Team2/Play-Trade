@@ -26,7 +26,7 @@ router.get('/', withAuth, async (req, res) => {
      console.log(userData)
 
      // query OwnedStock table to find all entries where owner_id = user's id
-  const ownedData = await OwnedStock.findAll({
+  /* const ownedData = await OwnedStock.findAll({
     where:{
       owner_id: userData.dataValues.id
     }
@@ -43,13 +43,13 @@ router.get('/', withAuth, async (req, res) => {
     })
     stocks.unshift(stockData)
     }
-    console.log(stocks[0].dataValues)
+    console.log(stocks[0].dataValues) */
     
     res.render('homepage', {
       users,
       logged_in: req.session.logged_in,
       user: userData.dataValues.name,
-      stocks:stocks,
+      /* stocks:stocks, */
     });
   } catch (err) {
     res.status(500).json(err);
