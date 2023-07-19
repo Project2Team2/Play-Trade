@@ -4,7 +4,8 @@ const { Stock }  = require('../models');
 const { OwnedStock }  = require('../models');
 const withAuth = require('../utils/auth');
 const axios = require('axios');
-const apikey = "2d39de05a6c0431c871588b30dec7652"
+
+
 
 router.get('/', withAuth, async (req, res) => {
   console.log("hello, world");
@@ -16,14 +17,12 @@ router.get('/', withAuth, async (req, res) => {
     });
 
     const users = usersData.map((project) => project.get({ plain: true }));
-    console.log(users);
     const userData = await User.findOne({
       where:{
         id: user_id
       },
       attributes: { exclude: ['password'] },
     })
-     console.log(userData)
 
      // query OwnedStock table to find all entries where owner_id = user's id
   /* const ownedData = await OwnedStock.findAll({
@@ -33,7 +32,7 @@ router.get('/', withAuth, async (req, res) => {
   })
   // quuery stock table to find all stocks where the ids match
   const ownedstocks = ownedData.map((stock) => stock.get({ plain: true }));
-  // console.log(ownedstocks)
+
   var stocks = [];
   for(var i = 0; i< ownedstocks.length; i++){
     const stockData = await Stock.findOne({
@@ -43,7 +42,7 @@ router.get('/', withAuth, async (req, res) => {
     })
     stocks.unshift(stockData)
     }
-    console.log(stocks[0].dataValues) */
+
     
     res.render('homepage', {
       users,
@@ -54,39 +53,59 @@ router.get('/', withAuth, async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-  console.log('hello')
+
 });
 
+
 router.get('/stock', withAuth, async (req,res)=>{
-  // console.log(`req query`, req.query)
-  var url = 'https://api.twelvedata.com/symbol_search?symbol=' + req.query.search + '&apikey=' + apikey;
+  const user_id= req.session.user_id;
+  var url = 'https://api.twelvedata.com/symbol_search?symbol=' + req.query.search + '&apikey=' + process.env.API_KEY;
   var response = await axios.get(url);
   var filteredData = response.data.data.filter(stock => stock.country == "United States"); 
-  // console.log(filteredData)
+
+  const userData = await User.findOne({
+    where:{
+      id: user_id
+    },
+    attributes: { exclude: ['password'] },
+  })
+
   res.render('stock',{
     stocks: filteredData,
     logged_in: req.session.logged_in,
+    user: userData.dataValues.name,
   });
 });
 
+
 router.get('/quote', withAuth, async (req, res) => {
-  // const user_id= req.session.user_id;
-  // console.log(`req query`, req.query)
-  var url = 'https://api.twelvedata.com/quote?symbol=' + req.query.symbol + '&apikey=' + apikey;
+  const user_id= req.session.user_id;
+  var url = 'https://api.twelvedata.com/quote?symbol=' + req.query.symbol + '&apikey=' + process.env.API_KEY;
+
   var response = await axios.get(url);
-  // console.log(response.data)
   var data = response.data;
   var open = parseFloat(data.open).toFixed(2);
   var close = parseFloat(data.close).toFixed(2);
   var high = parseFloat(data.high).toFixed(2);
   var low = parseFloat(data.low).toFixed(2);
+
+  const userData = await User.findOne({
+    where:{
+      id: user_id
+    },
+    attributes: { exclude: ['password'] },
+  })
+
   res.render('quote',{
     data: data,
     open: open,
     close: close,
     high: high,
     low: low,
+
     logged_in: req.session.logged_in,
+
+    user: userData.dataValues.name,
   });
 });
 

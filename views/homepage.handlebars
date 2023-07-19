@@ -1,7 +1,12 @@
 {{!-- the data gets on the page but it could look better --}}
+
 <div class="row row-cols-1 row-cols-md-2 g-4 pt-3 pb-3">
 
 <h1 class="mt-4">Hello, {{user}}! Welcome to your portfolio!</h1>
+
+{{#if stocks}}
+
+
 {{#each stocks as |stock|}}
 <table class="my-table" style="width:100%">
     {{!-- <thead class="thead-dark"> --}}
@@ -20,4 +25,10 @@
 </table>
 {{/each}}
 
+
 </div>
+{{/if}}
+{{#unless stocks}}
+<h2>Add stocks to your portfolio to see them here.</h2>
+{{/unless}}
+
