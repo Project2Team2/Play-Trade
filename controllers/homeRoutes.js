@@ -57,7 +57,7 @@ router.get('/', withAuth, async (req, res) => {
   console.log('hello')
 });
 
-router.get('/stock',async (req,res)=>{
+router.get('/stock', withAuth, async (req,res)=>{
   // console.log(`req query`, req.query)
   var url = 'https://api.twelvedata.com/symbol_search?symbol=' + req.query.search + '&apikey=' + apikey;
   var response = await axios.get(url);
@@ -69,7 +69,7 @@ router.get('/stock',async (req,res)=>{
   });
 });
 
-router.get('/quote', async (req, res) => {
+router.get('/quote', withAuth, async (req, res) => {
   // const user_id= req.session.user_id;
   // console.log(`req query`, req.query)
   var url = 'https://api.twelvedata.com/quote?symbol=' + req.query.symbol + '&apikey=' + apikey;
@@ -85,10 +85,14 @@ router.get('/quote', async (req, res) => {
     open: open,
     close: close,
     high: high,
-    low: low
+    low: low,
+    logged_in: req.session.logged_in,
   });
 });
 
+router.get('/about', withAuth, async (req, res) => {
+  res.render('about', { logged_in: req.session.logged_in});
+});
 
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {

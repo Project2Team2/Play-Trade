@@ -1,10 +1,10 @@
 <h1>Search Results</h1>
 {{#each stocks as |stock| }}
-    <div class="stock-details">
-        <h2>{{stock.instrument_name}} 
+<div class="stock-details">
+    <h2>{{stock.instrument_name}}
         <form method="get" action="/quote">
-            <input type="text" value="{{stock.symbol}}" name="symbol"/>
-            <button id="btnSearch"  type="submit" class="btn btn-primary">+</button>
+            <input type="text" value="{{stock.symbol}}" name="symbol" />
+            <button id="btnSearch" type="submit" class="btn btn-primary">+</button>
         </form>
-    </div>
+</div>
 {{/each}}

@@ -4,7 +4,16 @@
 }
 
 /* ignore for now */
-
+@media (min-width: 576px) {
+  .h-sm-100 {
+      height: 100%;
+  }
+}
+.card-img-top {
+  width: 100%;
+  height: 30vw;
+  object-fit: cover;
+}
 
 
  :root {
