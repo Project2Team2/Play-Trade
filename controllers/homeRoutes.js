@@ -25,7 +25,7 @@ router.get('/', withAuth, async (req, res) => {
     })
 
      // query OwnedStock table to find all entries where owner_id = user's id
-  const ownedData = await OwnedStock.findAll({
+  /* const ownedData = await OwnedStock.findAll({
     where:{
       owner_id: userData.dataValues.id
     }
@@ -42,12 +42,13 @@ router.get('/', withAuth, async (req, res) => {
     })
     stocks.unshift(stockData)
     }
+
     
     res.render('homepage', {
       users,
       logged_in: req.session.logged_in,
       user: userData.dataValues.name,
-      stocks:stocks,
+      /* stocks:stocks, */
     });
   } catch (err) {
     res.status(500).json(err);
@@ -55,7 +56,8 @@ router.get('/', withAuth, async (req, res) => {
 
 });
 
-router.get('/stock',async (req,res)=>{
+
+router.get('/stock', withAuth, async (req,res)=>{
   const user_id= req.session.user_id;
   var url = 'https://api.twelvedata.com/symbol_search?symbol=' + req.query.search + '&apikey=' + process.env.API_KEY;
   var response = await axios.get(url);
@@ -75,9 +77,11 @@ router.get('/stock',async (req,res)=>{
   });
 });
 
-router.get('/quote', async (req, res) => {
+
+router.get('/quote', withAuth, async (req, res) => {
   const user_id= req.session.user_id;
   var url = 'https://api.twelvedata.com/quote?symbol=' + req.query.symbol + '&apikey=' + process.env.API_KEY;
+
   var response = await axios.get(url);
   var data = response.data;
   var open = parseFloat(data.open).toFixed(2);
@@ -98,10 +102,16 @@ router.get('/quote', async (req, res) => {
     close: close,
     high: high,
     low: low,
+
+    logged_in: req.session.logged_in,
+
     user: userData.dataValues.name,
   });
 });
 
+router.get('/about', withAuth, async (req, res) => {
+  res.render('about', { logged_in: req.session.logged_in});
+});
 
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {
