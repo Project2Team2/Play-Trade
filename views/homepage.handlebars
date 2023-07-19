@@ -1,5 +1,7 @@
 {{!-- the data gets on the page but it could look better --}}
 <h1 class="mt-4">Portfolio</h1>
+{{#if stocks}}
+
 {{#each stocks as |stock|}}
 <table class="my-table" style="width:100%">
     {{!-- <thead class="thead-dark"> --}}
@@ -17,3 +19,7 @@
      </tr>
 </table>
 {{/each}}
+{{/if}}
+{{#unless stocks}}
+<h2>Add stocks to your portfolio to see them here.</h2>
+{{/unless}}

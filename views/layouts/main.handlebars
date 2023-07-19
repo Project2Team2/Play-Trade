@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Sidenav Light - SB Admin</title>
+        <title>Play Trade</title>
         <link href="./css/stylesheet.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
@@ -32,8 +32,8 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/portfolio/{{user.name}}">Portfolio</a></li>
-                        <li><hr class="dropdown-divider" /></li>
+                        {{!-- <li><a class="dropdown-item" href="/portfolio/{{user.name}}">Portfolio</a></li> --}}
+                        {{!-- <li><hr class="dropdown-divider" /></li> --}}
                         <li><a class="dropdown-item" id="logout" href="">Logout</a></li>
                     </ul>
                 </li>
@@ -81,7 +81,7 @@
                     {{#if logged_in}}
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                            {{user.name}}
+                            {{user}}
                     </div>
                     {{/if}}
                 </nav>

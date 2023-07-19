@@ -37,6 +37,7 @@ const signupFormHandler = async (event) => {
       document.location.replace('/');
       console.log('success');
     } else {
+      // my goal for the last project day is to get messages to tell the user what they did wrong
       alert('Failed to sign up.');
     }
   }
