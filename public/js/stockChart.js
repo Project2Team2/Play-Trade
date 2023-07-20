@@ -86,10 +86,13 @@
             data: volume,
             yAxis: 1
         }],
+        chart: {
+            width: 500
+        },
         responsive: {
             rules: [{
                 condition: {
-                    maxWidth: 800
+                    maxWidth: 500
                 },
                 chartOptions: {
                     rangeSelector: {

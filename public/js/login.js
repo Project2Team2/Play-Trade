@@ -37,15 +37,12 @@ const signupFormHandler = async (event) => {
       document.location.replace('/');
       console.log('success');
     } else {
+      // my goal for the last project day is to get messages to tell the user what they did wrong
       alert('Failed to sign up.');
     }
   }
 };
 
-document
-  .querySelector('.login-form')
-  .addEventListener('submit', loginFormHandler);
+document.querySelector('#login-form').addEventListener('click', loginFormHandler);
 
-document
-  .querySelector('.signup-form')
-  .addEventListener('submit', signupFormHandler);
+document.querySelector('#signup-form').addEventListener('click', signupFormHandler);

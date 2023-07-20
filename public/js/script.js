@@ -1,28 +1,20 @@
-console.log("hello");
 const searchBox = document.querySelector('#search-input')
-console.log(searchBox);
 const searchBtn = document.getElementById("search-button");
-console.log(searchBtn);
 
-searchBtn.addEventListener("click", ()=>{
+/* searchBtn.addEventListener("click", ()=>{
     const searchvalue = document.querySelector('#search-input').value
     
-});
+}); */
 
 //toggle button function NOT WORKING
-document.addEventListener('DOMContentLoaded', function () {
-    var sidebarToggle = document.getElementById('sidebarToggle');
-    var layoutSidenav = document.getElementById('layoutSidenav');
-    
-    sidebarToggle.addEventListener('click', function (event) {
-        event.preventDefault();
-        
-        layoutSidenav.classList.toggle('sb-sidenav-toggled');
-    });
-});
+/* document.ready(function() {
+    document.querySelector('#sidebarToggle').addEventListener('click', (function() {
+      document.querySelector('#layoutSidenav').toggleClass('show');
+    }));
+  }); */
 
 //pres log in button get routed to main.handlebars NOT WORKING
-document.addEventListener('DOMContentLoaded', function () {
+/* document.addEventListener('DOMContentLoaded', function () {
     var loginForm = document.getElementById('loginForm');
     
     loginForm.addEventListener('submit', function (event) {
@@ -34,4 +26,17 @@ document.addEventListener('DOMContentLoaded', function () {
         // Redirect to the specified URL
         window.location.href = action;
     });
-});
+}); */
+
+function up(max) {
+  document.getElementById("stockNumber").value = parseInt(document.getElementById("stockNumber").value) + 1;
+  if (document.getElementById("stockNumber").value >= parseInt(max)) {
+      document.getElementById("stockNumber").value = max;
+  }
+}
+function down(min) {
+  document.getElementById("stockNumber").value = parseInt(document.getElementById("stockNumber").value) - 1;
+  if (document.getElementById("stockNumber").value <= parseInt(min)) {
+      document.getElementById("stockNumber").value = min;
+  }
+}

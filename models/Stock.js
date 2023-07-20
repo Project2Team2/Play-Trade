@@ -21,7 +21,7 @@ Stock.init(
             type: DataTypes.STRING,
             allowNull: false,
           },
-        price: {
+        close_price: {
             type: DataTypes.DECIMAL,
             allowNull: false,
             validate:{

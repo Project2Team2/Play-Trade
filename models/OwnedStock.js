@@ -25,7 +25,7 @@ OwnedStock.init(
                 key: 'id'
             }
         },
-         shares_owned: {
+        shares_owned: {
             type: DataTypes.INTEGER,
             allowNull: false,
             validate:{

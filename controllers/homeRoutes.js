@@ -1,26 +1,127 @@
 const router = require('express').Router();
 const { User } = require('../models')
 const { Stock }  = require('../models');
+const { OwnedStock }  = require('../models');
 const withAuth = require('../utils/auth');
 const axios = require('axios');
-const apikey = "2d39de05a6c0431c871588b30dec7652"
 
-router.get('/', /* withAuth, */ async (req, res) => {
+
+
+router.get('/', withAuth, async (req, res) => {
+  console.log("hello, world");
   try {
-    const userData = await User.findAll({
+    const user_id= req.session.user_id;
+    const usersData = await User.findAll({
       attributes: { exclude: ['password'] },
       order: [['name', 'ASC']],
     });
 
-    const users = userData.map((project) => project.get({ plain: true }));
+    const users = usersData.map((project) => project.get({ plain: true }));
+    const userData = await User.findOne({
+      where:{
+        id: user_id
+      },
+      attributes: { exclude: ['password'] },
+    })
 
+     // query OwnedStock table to find all entries where owner_id = user's id
+   const ownedData = await OwnedStock.findAll({
+    where:{
+      owner_id: userData.dataValues.id
+    }
+  })
+  // quuery stock table to find all stocks where the ids match
+  const ownedstocks = ownedData.map((stock) => stock.get({ plain: true }));
+
+  var stocks = [];
+  var totalValue = 0;
+  var sharesArr = []
+
+  for(var i = 0; i< ownedstocks.length; i++){
+    const stockData = await Stock.findOne({
+      where:{
+        id:ownedstocks[i].stock_id
+      }
+    })
+    stocks.unshift(stockData)
+    sharesArr.unshift(ownedstocks[i].shares_owned)
+    }
+    for(var i = 0; i < stocks.length; i++){
+      totalValue += stocks[i].dataValues.close_price
+    }
     res.render('homepage', {
       users,
       logged_in: req.session.logged_in,
+      user: userData.dataValues.name,
+      stocks:stocks,
+      shares:sharesArr,
+      totalValue:totalValue,
     });
   } catch (err) {
     res.status(500).json(err);
   }
+
+});
+
+
+router.get('/stock', withAuth, async (req,res)=>{
+  const user_id= req.session.user_id;
+  var url = 'https://api.twelvedata.com/symbol_search?symbol=' + req.query.search + '&apikey=' + process.env.API_KEY;
+  var response = await axios.get(url);
+  var filteredData = response.data.data.filter(stock => stock.country == "United States"); 
+
+  const userData = await User.findOne({
+    where:{
+      id: user_id
+    },
+    attributes: { exclude: ['password'] },
+  })
+
+  res.render('stock',{
+    stocks: filteredData,
+    logged_in: req.session.logged_in,
+    user: userData.dataValues.name,
+  });
+});
+
+
+router.get('/quote', withAuth, async (req, res) => {
+  const user_id= req.session.user_id;
+  var url = 'https://api.twelvedata.com/quote?symbol=' + req.query.symbol + '&apikey=' + process.env.API_KEY;
+
+  var response = await axios.get(url);
+  var data = response.data;
+  var open = parseFloat(data.open).toFixed(2);
+  var close = parseFloat(data.close).toFixed(2);
+  var high = parseFloat(data.high).toFixed(2);
+  var low = parseFloat(data.low).toFixed(2);
+
+  const userData = await User.findOne({
+    where:{
+      id: user_id
+    },
+    attributes: { exclude: ['password'] },
+  })
+
+  res.render('quote',{
+    data: data,
+    open: open,
+    close: close,
+    high: high,
+    low: low,
+
+    logged_in: req.session.logged_in,
+
+    user: userData.dataValues.name,
+  });
+});
+
+router.get('/about', withAuth, async (req, res) => {
+  res.render('about', { logged_in: req.session.logged_in});
+});
+
+router.get('/stock-tools', withAuth, async (req, res) => {
+  res.render('stock-tools', { logged_in: req.session.logged_in});
 });
 
 router.get('/login', (req, res) => {
@@ -31,21 +132,5 @@ router.get('/login', (req, res) => {
 
   res.render('login');
 });
-router.get('/stock',async (req,res)=>{
-  console.log(`req query`, req.query)
-  var url = 'https://api.twelvedata.com/symbol_search?symbol=' + req.query.search + '&apikey=' + apikey;
-  var response = await axios.get(url);
-  var filteredData = response.data.data.filter(stock => stock.country == "United States"); 
-  console.log(filteredData)
-  res.render('stock',{
-    stocks: filteredData
-  });
-});
-
-router.get('/price', async (req, res) => {
-  var url = 'https://api.twelvedata.com/price?symbol=' + tickers.toString() + '&apikey=' + apikey;
-  var response = await axios.get(url);
-  console.log(response)
-})
 
 module.exports = router;

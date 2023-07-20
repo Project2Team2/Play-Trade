@@ -1,0 +1,53 @@
+{{!-- <style>
+    table,
+    th,
+    td {
+
+        border: 1px solid black;
+
+    }
+</style> --}}
+<div class="row row-cols-1 row-cols-md-2 g-4 pt-3 pb-3">
+
+<h1>Stock Quote Information</h1>
+<h2><span id="name">{{{data.name}}}</span> - <span id="symbol">{{{data.symbol}}}</span></h2>
+<h3>{{data.datetime}}</h3>
+<table class="my-table" style="width:100%">
+    {{!-- <thead class="thead-dark"> --}}
+        <tr>
+            <td class="thead-dark">Exchange</td>
+            <td class="thead-dark">{{data.exchange}}</td>
+        </tr>
+        <tr>
+            <td>Open Price</td>
+            <td>${{open}}</td>
+        </tr>
+        <tr>
+            <td>High Price</td>
+            <td>${{high}}</td>
+        </tr>
+        <tr>
+            <td>Low Price</td>
+            <td>${{low}}</td>
+        </tr>
+        <tr>
+            <td>Close Price</td>
+            <td id="closePrice">${{close}}</td>
+        </tr>
+</table>
+</div>
+
+
+ <div class="input-group">
+    
+            <div class="input-group-btn">
+                <button id="down" class="btn btn-primary" onclick=" down('0')">-</button>
+            </div>
+            <input type="text" id="stockNumber" class="form-control input-number" value="1" />
+            <div class="input-group-btn">
+                <button id="up" class="btn btn-primary" onclick="up('1000')">+</button>
+            </div>
+</div>
+<button id="save-btn" type="button" class="btn btn-primary">Add Stock(s) to your portfolio</button>
+
+<script src="./js/stock.js"></script>
