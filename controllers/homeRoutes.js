@@ -35,6 +35,7 @@ router.get('/', withAuth, async (req, res) => {
 
   var stocks = [];
   var totalValue = 0;
+  var sharesArr = []
 
   for(var i = 0; i< ownedstocks.length; i++){
     const stockData = await Stock.findOne({
@@ -43,17 +44,17 @@ router.get('/', withAuth, async (req, res) => {
       }
     })
     stocks.unshift(stockData)
+    sharesArr.unshift(ownedstocks[i].shares_owned)
     }
     for(var i = 0; i < stocks.length; i++){
       totalValue += stocks[i].dataValues.close_price
     }
-    console.log("totalValue:")
-    console.log(totalValue)
     res.render('homepage', {
       users,
       logged_in: req.session.logged_in,
       user: userData.dataValues.name,
       stocks:stocks,
+      shares:sharesArr,
       totalValue:totalValue,
     });
   } catch (err) {
