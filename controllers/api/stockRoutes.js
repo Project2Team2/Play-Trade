@@ -10,14 +10,14 @@ router.post('/', async (req, res) => {
     //  pass the fields from the req.body to correspond with the model
     name: req.body.name,
     close_price: req.body.closePrice,
-    symbol: req.body.symbol
+    symbol: req.body.symbol,
+    shares_owned: req.body.numShares
     });
   
     
     const ownedStockData = await OwnedStock.create({
       owner_id: req.session.user_id, 
-      stock_id: dbStockData.id,
-      shares_owned: req.body.numShares
+      stock_id: dbStockData.id
     })
     res.status(200).json(dbStockData);
   } catch (err) {

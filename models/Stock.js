@@ -28,13 +28,13 @@ Stock.init(
             isDecimal: true
             }
         },
-        // shares_owned: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: false,
-        //     validate:{
-        //         isInt: true
-        //     }
-        // },
+        shares_owned: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            validate:{
+                isInt: true
+            }
+        },
         /* user_id:{
             type: DataTypes.INTEGER,
             references:{
