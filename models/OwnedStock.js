@@ -25,13 +25,13 @@ OwnedStock.init(
                 key: 'id'
             }
         },
-        shares_owned: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            validate:{
-                isInt: true
-            }
-        }
+        // shares_owned: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: false,
+        //     validate:{
+        //         isInt: true
+        //     }
+        // }
     },
     {
         sequelize,
