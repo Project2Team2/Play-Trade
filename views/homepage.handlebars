@@ -22,9 +22,13 @@
         <td>Close Price</td>
         <td>${{stock.dataValues.close_price}}</td>
      </tr>
+      <tr>
+        <td>Shares Owned</td>
+        <td>{{stock.dataValues.shares_owned}}</td>
+     </tr>
 </table>
 {{/each}}
-
+<h1>Total portfolio value: {{totalValue}} </h1>
 
 </div>
 {{/if}}

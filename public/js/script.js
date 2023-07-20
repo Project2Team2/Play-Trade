@@ -27,3 +27,16 @@ const searchBtn = document.getElementById("search-button");
         window.location.href = action;
     });
 }); */
+
+function up(max) {
+  document.getElementById("stockNumber").value = parseInt(document.getElementById("stockNumber").value) + 1;
+  if (document.getElementById("stockNumber").value >= parseInt(max)) {
+      document.getElementById("stockNumber").value = max;
+  }
+}
+function down(min) {
+  document.getElementById("stockNumber").value = parseInt(document.getElementById("stockNumber").value) - 1;
+  if (document.getElementById("stockNumber").value <= parseInt(min)) {
+      document.getElementById("stockNumber").value = min;
+  }
+}

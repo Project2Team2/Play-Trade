@@ -34,6 +34,8 @@ router.get('/', withAuth, async (req, res) => {
   const ownedstocks = ownedData.map((stock) => stock.get({ plain: true }));
 
   var stocks = [];
+  var totalValue = 0;
+
   for(var i = 0; i< ownedstocks.length; i++){
     const stockData = await Stock.findOne({
       where:{
@@ -42,13 +44,17 @@ router.get('/', withAuth, async (req, res) => {
     })
     stocks.unshift(stockData)
     }
-
-    
+    for(var i = 0; i < stocks.length; i++){
+      totalValue += stocks[i].dataValues.close_price
+    }
+    console.log("totalValue:")
+    console.log(totalValue)
     res.render('homepage', {
       users,
       logged_in: req.session.logged_in,
       user: userData.dataValues.name,
-      stocks:stocks, 
+      stocks:stocks,
+      totalValue:totalValue,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -111,6 +117,10 @@ router.get('/quote', withAuth, async (req, res) => {
 
 router.get('/about', withAuth, async (req, res) => {
   res.render('about', { logged_in: req.session.logged_in});
+});
+
+router.get('/stock-tools', withAuth, async (req, res) => {
+  res.render('stock-tools', { logged_in: req.session.logged_in});
 });
 
 router.get('/login', (req, res) => {

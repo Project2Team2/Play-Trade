@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -15,7 +14,7 @@
 
 <body>
     <div class="container-fluid overflow-hidden">
-        <div class="row vh-100 overflow-auto">
+        <div class="row h-100 overflow-auto">
             <div class="col-12 col-sm-3 col-xl-2 px-sm-2 px-0 bg-secondary d-flex ">
                 <div
                     class="d-flex flex-sm-column  align-items-center align-items-sm-start px-3 pt-2 text-white">
@@ -48,12 +47,14 @@
             <div class="pb-3 mt-auto"> <button class="btn  btn-primary" id="logout">
                     Logout
             </button></div>{{/if}}
-
+            </div>
             
         </div>
         <div class="col d-flex flex-column h-sm-100 h-100">
             {{{body}}}
-            <footer class="row bg-light py-4 mt-auto">
+        </div>
+        </div>
+        <footer class="row bg-light ">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
                         <div class="text-muted">NOT Copyright &copy; Mock Market Makers 2023</div>
@@ -65,7 +66,6 @@
                     </div>
                 </div>
             </footer>
-        </div>
     </div>
     </div>
     </div>
@@ -78,6 +78,7 @@
         crossorigin="anonymous"></script>
 
     <script src="./js/script.js"></script>
+    <script src="./js/stockChart.js"></script>
     {{#if logged_in}}
     <script src="./js/logout.js"></script> {{/if}}
 </body>

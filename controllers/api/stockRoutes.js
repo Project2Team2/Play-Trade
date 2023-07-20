@@ -21,6 +21,7 @@ router.post('/', async (req, res) => {
     const ownedStockData = await OwnedStock.create({
       owner_id: userData.dataValues.id, 
       stock_id: dbStockData.id,
+      owned_shares: req.body.numShares
     })
     res.status(200).json(dbStockData);
   } catch (err) {
