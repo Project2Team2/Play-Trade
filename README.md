@@ -25,8 +25,8 @@ Create an account to start your learning journey! Once you are logged in you wil
 
 # Creators
 
-- Amadeus Machuca
-- Peter Conenna
-- North Goddard 
-- Stephanie Angelito 
+- Amadeus Machuca (https://github.com/microvac23)
+- Peter Conenna (https://github.com/pconenna)
+- North Goddard (https://github.com/northgoddard)
+- Stephanie Angelito (https://github.com/sangelito)
 
