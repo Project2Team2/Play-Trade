@@ -14,10 +14,11 @@ for the user to read to gain a better understanding of the stock market.
 - [Usage](#usage)
 - [Play Trade Images](#images)
 - [Creators](#creators)
+- [Deployed] (#deployedapp)
 
 ## Usage 
 
-Create an account to start your learning journey! Once you are logged in you will be able to search and add stocks to your portfolio. To add a stock, type the name of the company in the search bar and press enter or press the button. results that match the query will be shown. Press the "info" button on the stock you want to see its price and have the option to add it to your portfolio. Select the number of shares and press the add to portfolio button to add the stock. Go to the home page to view your portfolio.
+Create an account to start your learning journey! Once you are logged in you will be able to search and add stocks to your portfolio. To add a stock, type the name of the company in the search bar and press enter or press the button. Results that match the query will be shown. Press the "info" button on the stock you want to see its price and have the option to add it to your portfolio. Select the number of shares and press the add to portfolio button to add the stock. Go to the home page to view your portfolio.
 
 
 # Images
@@ -25,9 +26,13 @@ Create an account to start your learning journey! Once you are logged in you wil
 
 <img width="721" alt="Screenshot" src="./public/images/2.png">
 
-<img width="721" alt="Screenshot" src="./public/images/1.png">
+<img width="721" alt="Screenshot" src="./public/images/3.png">
 
-<img width="721" alt="Screenshot" src=".public/images/4.png">
+<img width="721" alt="Screenshot" src="./public/images/4.png">
+
+## Deployed App 
+
+https://play-trade-3e0a6365bb54.herokuapp.com/login 
 
 # Creators
 
