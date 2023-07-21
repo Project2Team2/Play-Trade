@@ -7,7 +7,7 @@
 - [Usage](#usage)
 - [Play Trade Images](#images)
 - [Creators](#creators)
-- [Deployed] (#deployedapp)
+- [Link](#link)
 
 
 
@@ -52,7 +52,7 @@ Select the number of shares and press the add to portfolio button to add the sto
 
 <img width="721" alt="Screenshot" src="./public/images/4.png">
 
-## Deployed App 
+# Link  
 
 https://play-trade-3e0a6365bb54.herokuapp.com/login 
 
