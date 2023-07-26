@@ -164,6 +164,13 @@
     margin-top: 0;
     margin-bottom: 1rem;
   }
+  .errHidden{
+    display: none;
+  }
+  .errShow{
+    color: var(--bs-red);
+    display: block;
+  }
   
   abbr[title] {
     -webkit-text-decoration: underline dotted;
