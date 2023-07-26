@@ -3,6 +3,7 @@ const loginFormHandler = async (event) => {
 
   const email = document.querySelector('#email-login').value.trim();
   const password = document.querySelector('#password-login').value.trim();
+  const errMsg = document.querySelector('#loginErr')
 
   if (email && password) {
     const response = await fetch('/api/users/login', {
@@ -14,7 +15,7 @@ const loginFormHandler = async (event) => {
     if (response.ok) {
       document.location.replace('/');
     } else {
-      alert('Failed to log in.');
+      errMsg.classList.replace("errHidden","errShow")
     }
   }
 };
@@ -25,7 +26,7 @@ const signupFormHandler = async (event) => {
   const name = document.querySelector('#name-signup').value.trim();
   const email = document.querySelector('#email-signup').value.trim();
   const password = document.querySelector('#password-signup').value.trim();
-
+  const errMsg = document.querySelector('#signUpErr')
   if (name && email && password) {
     const response = await fetch('/api/users', {
       method: 'POST',
@@ -38,7 +39,7 @@ const signupFormHandler = async (event) => {
       console.log('success');
     } else {
       // my goal for the last project day is to get messages to tell the user what they did wrong
-      alert('Failed to sign up.');
+      errMsg.classList.replace("errHidden","errShow")
     }
   }
 };
